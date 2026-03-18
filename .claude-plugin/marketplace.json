@@ -1,0 +1,15 @@
+{
+  "name": "diary-recorder",
+  "owner": {
+    "name": "yu-changqian",
+    "url": "https://github.com/yu-changqian"
+  },
+  "plugins": [
+    {
+      "name": "diary-recorder",
+      "source": "./",
+      "description": "日记记录与整理系统，碎片记录、Tag 管理、周总结",
+      "version": "1.0.0"
+    }
+  ]
+}

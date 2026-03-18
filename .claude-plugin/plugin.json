@@ -1,0 +1,18 @@
+{
+  "name": "diary-recorder",
+  "version": "1.0.0",
+  "description": "日记记录与整理系统。接收用户碎片化记录，按日整理为结构化日记，自动维护 Tag 体系，生成周总结。",
+  "author": {
+    "name": "yu-changqian",
+    "url": "https://github.com/yu-changqian"
+  },
+  "repository": "https://github.com/yu-changqian/diary-recorder",
+  "license": "MIT",
+  "keywords": [
+    "diary",
+    "journal",
+    "daily-log",
+    "tag",
+    "weekly-summary"
+  ]
+}

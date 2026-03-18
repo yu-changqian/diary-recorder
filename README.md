@@ -1,6 +1,6 @@
 # diary-recorder
 
-马伯庸式日记记录 Skill，适用于 Cursor / OpenClaw 等 skills-compatible agent。
+马伯庸式日记记录 Skill，适用于 Claude Code、OpenClaw、Codex CLI 等 skills-compatible agent。
 
 体例出自《越缦堂日记》：细大必书，一事一条，日常直录。用户随时记录碎片，系统负责整理、打标签、生成日记和周总结。
 
@@ -14,21 +14,44 @@
 
 ## 安装
 
-### Cursor / OpenClaw
+### Claude Code（Marketplace）
 
-将本仓库 clone 或 symlink 到你的 skills 目录：
+```
+/plugin marketplace add yu-changqian/diary-recorder
+/plugin install diary-recorder@diary-recorder
+```
+
+### Claude Code（手动）
+
+将本仓库 clone 到项目的 `.claude/` 目录，或添加到全局 skills 路径。
+
+### OpenClaw / Cursor
 
 ```bash
-# 方式一：clone
 git clone https://github.com/yu-changqian/diary-recorder.git ~/.cursor/skills/diary-recorder
+```
 
-# 方式二：symlink（如果你已经 clone 到其他位置）
+或用 symlink：
+
+```bash
 ln -s /path/to/diary-recorder ~/.cursor/skills/diary-recorder
 ```
 
-### 配置
+### Codex CLI
 
-安装后打开 `SKILL.md`，修改配置段中的两个路径：
+```bash
+git clone https://github.com/yu-changqian/diary-recorder.git ~/.codex/skills/diary-recorder
+```
+
+### npx skills
+
+```
+npx skills add git@github.com:yu-changqian/diary-recorder.git
+```
+
+## 配置
+
+安装后打开 `skills/diary-recorder/SKILL.md`，修改配置段中的两个路径：
 
 | 变量 | 默认值 | 说明 |
 |------|--------|------|
@@ -58,13 +81,128 @@ ln -s /path/to/diary-recorder ~/.cursor/skills/diary-recorder
 
 ## 文件说明
 
-| 文件 | 内容 |
-|------|------|
-| `SKILL.md` | 核心指令：流程定义、触发词、配置 |
-| `diary-format.md` | 日记和周总结的格式模板 |
-| `tag-system.md` | Tag 体系管理规范 |
-| `examples.md` | 完整交互示例 |
-| `scripts/now.py` | 本地时间获取脚本 |
+```
+diary-recorder/
+├── .claude-plugin/
+│   ├── plugin.json          # Claude Code 插件清单
+│   └── marketplace.json     # Marketplace 目录
+├── skills/
+│   └── diary-recorder/
+│       ├── SKILL.md          # 核心指令：流程定义、触发词、配置
+│       ├── diary-format.md   # 日记和周总结的格式模板
+│       ├── tag-system.md     # Tag 体系管理规范
+│       ├── examples.md       # 完整交互示例
+│       └── scripts/
+│           └── now.py        # 本地时间获取脚本
+├── README.md
+└── LICENSE
+```
+
+## License
+
+MIT
+
+---
+
+# diary-recorder (English)
+
+A diary recording skill for skills-compatible agents (Claude Code, OpenClaw, Codex CLI, etc.).
+
+Inspired by the style of *Yue Man Tang Ri Ji* (越缦堂日记): record everything, one entry per matter, plain daily logging. Users jot down fragments anytime; the system handles organizing, tagging, compiling daily diaries, and generating weekly summaries.
+
+## Features
+
+- **Fragment recording** — Say "记一下…" (note this down) to record; the system auto-stamps time and tags
+- **Daily compilation** — Organizes a day's fragments into a structured diary entry
+- **Tag system** — Flat tag list that grows organically; auto-matches existing tags or creates new ones
+- **Backfill & edit** — Supports recording past entries, modifying or deleting existing records
+- **Weekly summary** — Groups the week's records by tag with statistics
+
+## Installation
+
+### Claude Code (Marketplace)
+
+```
+/plugin marketplace add yu-changqian/diary-recorder
+/plugin install diary-recorder@diary-recorder
+```
+
+### Claude Code (Manual)
+
+Clone this repo into your project's `.claude/` directory, or add it to your global skills path.
+
+### OpenClaw / Cursor
+
+```bash
+git clone https://github.com/yu-changqian/diary-recorder.git ~/.cursor/skills/diary-recorder
+```
+
+Or symlink:
+
+```bash
+ln -s /path/to/diary-recorder ~/.cursor/skills/diary-recorder
+```
+
+### Codex CLI
+
+```bash
+git clone https://github.com/yu-changqian/diary-recorder.git ~/.codex/skills/diary-recorder
+```
+
+### npx skills
+
+```
+npx skills add git@github.com:yu-changqian/diary-recorder.git
+```
+
+## Configuration
+
+After installation, open `skills/diary-recorder/SKILL.md` and adjust the two paths in the configuration section:
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DIARY_HOME` | `~/diary` | Where diary data is stored |
+| `SKILL_DIR` | Skill's own directory | Base path for scripts and resources |
+
+Defaults work out of the box in most cases.
+
+### Dependencies
+
+- Python 3 (for the time script `scripts/now.py`)
+
+## Usage
+
+Use trigger words in conversation (currently Chinese triggers):
+
+| Trigger | Action |
+|---------|--------|
+| `记一下，…` / `记录，…` | Record a diary entry |
+| `整理日记` | Compile today's diary |
+| `整理 03-16 的日记` | Compile a specific date |
+| `周总结` | Generate weekly summary |
+| `补记昨天，…` | Backfill a past entry |
+| `改一下记录，…` | Edit an existing record |
+
+Conversations without trigger words are not recorded.
+
+## File Structure
+
+```
+diary-recorder/
+├── .claude-plugin/
+│   ├── plugin.json          # Claude Code plugin manifest
+│   └── marketplace.json     # Marketplace catalog
+├── skills/
+│   └── diary-recorder/
+│       ├── SKILL.md          # Core instructions: workflows, triggers, config
+│       ├── diary-format.md   # Daily diary and weekly summary templates
+│       ├── tag-system.md     # Tag management rules
+│       ├── examples.md       # Full interaction examples
+│       └── scripts/
+│           └── now.py        # Local time helper script
+├── README.md
+└── LICENSE
+```
 
 ## License
 
